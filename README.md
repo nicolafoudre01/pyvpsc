@@ -1,4 +1,5 @@
 # pyvpsc
+<<<<<<< HEAD
 
 Strain-rate driven viscoplastic self-consistent (VPSC) polycrystal model, built on `pyhom`
 (Hill tensor, `Phase` / `Aggregate`). Fixed texture, no hardening.
@@ -29,3 +30,6 @@ Install (pyhom first) and run:
 
 Conventions: Mandel 6-vectors / 6x6 matrices (xx, yy, zz, xy, xz, yz); Bunge angles in degrees,
 g = sample -> crystal, R = g^T = crystal -> sample; HCP crystal frame: z // [0001], x // [2-1-10].
+=======
+Python implementation of an affine viscoplastic self-consistent model for power law polycrystals. This project is based on the implementation of classical linear elasticity homogenization schemes.
+>>>>>>> 95304d780b5a2c98f493215198420d03d0d1d828
