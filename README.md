@@ -1,3 +1,6 @@
+![Python](https://img.shields.io/badge/Language-Python-3776AB?logo=python&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?logo=opensourceinitiative)
+
 # pyvpsc
 
 Strain-rate driven viscoplastic self-consistent (VPSC) polycrystal model, built on `pyhom`
