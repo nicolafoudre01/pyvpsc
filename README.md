@@ -1,3 +1,6 @@
+![Python](https://img.shields.io/badge/Language-Python-3776AB?logo=python&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?logo=opensourceinitiative)
+
 # pyvpsc
 
 Strain-rate driven viscoplastic self-consistent (VPSC) polycrystal model, built on `pyhom`
@@ -29,3 +32,8 @@ Install (pyhom first) and run:
 
 Conventions: Mandel 6-vectors / 6x6 matrices (xx, yy, zz, xy, xz, yz); Bunge angles in degrees,
 g = sample -> crystal, R = g^T = crystal -> sample; HCP crystal frame: z // [0001], x // [2-1-10].
+
+## License
+
+This project is licensed under the MIT License.
+See the [LICENSE](LICENSE) file for details
