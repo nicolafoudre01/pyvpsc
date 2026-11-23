@@ -26,7 +26,7 @@ SLIP = {
     "basal":     dict(tau_c=1.0 , gamma0=1.0),
     "prismatic": dict(tau_c=1.0 , gamma0=1.0),
     "pyr_a":     dict(tau_c=1.0 , gamma0=0  ),
-    "pyr_ca_I":  dict(tau_c=40.0, gamma0=1.0),
+    "pyr_ca_I":  dict(tau_c=50  , gamma0=1.0),
     "pyr_ca_II": dict(tau_c=1.0 , gamma0=0  ),
 }
 # Per-SYSTEM overrides, key = (family, index within the family, starting at 1).
@@ -40,7 +40,7 @@ SYSTEM_OVERRIDES = {
 # CRYSTAL = "bcc";  SLIP = {"110<111>": dict(tau_c=1.0), "112<111>": dict(tau_c=1.0)}
 
 # ============================= LOCAL LAW ===============================
-N_EXP = 5.0                # stress exponent n = 1/m  (n = 1: linear viscous)
+N_EXP = 5                  # stress exponent n = 1/m  (n = 1: linear viscous)
 K_PEN = None               # Hutchinson penalty bulk modulus; None -> 1e4 * mean(tau_c) / mean(gamma0)
 
 # ====================== LOADING (strain-rate driven) ====================
@@ -55,7 +55,7 @@ D = EPS_RATE * np.array([[-0.5, 0.0, 0.0],
 # ============================ SELF-CONSISTENT ===========================
 LINEARIZATION = "affine"   # "secant" | "affine"
 NQ = 32                    # quadrature order of the Hill tensor integral (n x n points)
-TOL = 1e-7                 # convergence on the grain stresses
+TOL = 1e-6                 # convergence on the grain stresses
 MAX_ITER = 300
 RELAX = None               # None: automatic (0.5, 0.25, 0.1) ; or a number in ]0, 1]
 VERBOSE = True             # print every iteration
