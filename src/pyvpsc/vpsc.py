@@ -1,11 +1,15 @@
 """
-Self-consistent VPSC, strain-rate driven, written equation by equation.
+Visco-Plastic Self-Consistent, strain-rate driven
 
 Unknowns: grain stresses sigma_g (g = 1..G), effective stiffness Lbar, macroscopic stress Sigma.
 Given     : macroscopic strain rate D (6,), weights w_g, orientations, local law, grain shape a.
 
 All tensors: Mandel 6-vectors / 6x6 matrices (MFront order, factor sqrt(2) on shear).
 Per-grain quantities are computed in explicit loops so that every line can be inspected.
+
+This version of the Visco-Plastic Self-Consistent model decouples the loop on the local phase-averaged stress fields
+and the loop on the self-consistent effective stiffness.  The latter is solved by a nested loop. This could be improved in future
+versions by computing the effective stifness at the same time as the local stress fields.
 """
 import numpy as np
 from pyhom import tenseurP
