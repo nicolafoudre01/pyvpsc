@@ -12,7 +12,7 @@ and the loop on the self-consistent effective stiffness.  The latter is solved b
 versions by computing the effective stifness at the same time as the local stress fields.
 """
 import numpy as np
-from pyhom import tenseurP
+from pyhom import ptensor
 
 from .grain_law import J_SPH, slip_rates, strain_rate
 from .linearization import linearize
@@ -38,7 +38,7 @@ def _iterate(D, agg, law, kind, a, nq, relax, tol, max_iter, sigma0, verbose, hi
         if Lbar is None:
             Lbar = sum(w[g] * L[g] for g in range(G))            # start: Voigt average of L_g    
         for it in range(1, max_iter + 1):                        # nested loop for self-consistent Lbar
-            P = tenseurP(a[0], a[1], a[2], Lbar, nq)
+            P = ptensor(a[0], a[1], a[2], Lbar, nq)
             Q = np.linalg.inv(P) - Lbar
             L_moy = sum(f * np.linalg.inv(L + Q) for f, L in zip(w, L))
             L_new = np.linalg.inv(L_moy) - Q
@@ -52,7 +52,7 @@ def _iterate(D, agg, law, kind, a, nq, relax, tol, max_iter, sigma0, verbose, hi
             else:
                 print("warning: self-consistent loop did not converge")
         Mbar = np.linalg.inv(Lbar)
-        P = tenseurP(a[0], a[1], a[2], Lbar, nq)
+        P = ptensor(a[0], a[1], a[2], Lbar, nq)
         Q = np.linalg.inv(P) - Lbar
         T = np.linalg.inv(Q)  # T = Q*^-1
         B = np.array([np.linalg.inv(M[g] + T)@(Mbar + T) for g in range(G)])
@@ -89,7 +89,7 @@ def vpsc(D, agg, law, kind="affine", a=(1.0, 1.0, 1.0), nq=16, tol=1e-9,
     """
     Sigma_T, sigma0 = taylor(D, agg, law)                        # start: Taylor stresses (eq 0)
     history = []
-    for r in ((0.5, 0.25, 0.1) if relax is None else (relax,)):
+    for r in ((1.0, 0.5, 0.25, 0.1) if relax is None else (relax,)):
         history.clear()
         if verbose:
             print(f"[vpsc] {kind}, n = {law.n}, relaxation = {r}")
