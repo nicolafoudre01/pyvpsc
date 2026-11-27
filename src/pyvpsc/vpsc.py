@@ -14,7 +14,7 @@ versions by computing the effective stifness at the same time as the local stres
 import numpy as np
 from pyhom import ptensor
 
-from .grain_law import J_SPH, slip_rates, strain_rate
+from .grain_law import J_SPH, strain_rate
 from .linearization import linearize
 from .taylor import taylor
 
@@ -42,7 +42,6 @@ def _iterate(D, agg, law, kind, a, nq, relax, tol, max_iter, sigma0, verbose, hi
             Q = np.linalg.inv(P) - Lbar
             L_moy = sum(f * np.linalg.inv(L + Q) for f, L in zip(w, L))
             L_new = np.linalg.inv(L_moy) - Q
-
             err = np.max(np.abs(L_new - Lbar)) / np.max(np.abs(L_new))
             Lbar = L_new
             if verbose:
